@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { GATE_OPEN_EVENT } from "./Gate";
 
 const RATIOS = [1, 9 / 8, 5 / 4, 3 / 2, 5 / 3, 2, (9 / 8) * 2, (5 / 4) * 2];
 const MELODY: [number, number][] = [
@@ -64,11 +65,23 @@ export default function MusicButton() {
   const ctxRef = useRef<AudioContext | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
+  const playing = useRef(false);
+
   useEffect(() => () => clearTimeout(timer.current), []);
 
+  // Start the shehnai when the guest opens the gate (that click allows audio)
+  useEffect(() => {
+    const start = () => {
+      if (!playing.current) toggle();
+    };
+    window.addEventListener(GATE_OPEN_EVENT, start);
+    return () => window.removeEventListener(GATE_OPEN_EVENT, start);
+  });
+
   const toggle = () => {
-    if (on) {
+    if (playing.current) {
       clearTimeout(timer.current);
+      playing.current = false;
       setOn(false);
       return;
     }
@@ -82,6 +95,7 @@ export default function MusicButton() {
         timer.current = setTimeout(loop, (length + 2.0) * 1000);
       };
       loop();
+      playing.current = true;
       setOn(true);
     } catch {
       /* Audio not supported */

@@ -1,103 +1,100 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLanguage, type Language } from "@/lib/LanguageContext";
+import { useLanguage } from "@/lib/LanguageContext";
 
-export type Theme = "crimson" | "emerald" | "rose";
-
-interface ThemeOption {
-  id: Theme;
-  name: string;
-  en: string;
-  color: string;
-  accent: string;
-}
-
-const THEMES: ThemeOption[] = [
-  { id: "crimson", name: "शाही मरून", en: "Royal Crimson", color: "#4a0e17", accent: "#d4af37" },
-  { id: "emerald", name: "शाही पन्ना", en: "Emerald Palace", color: "#0c3629", accent: "#e2b85e" },
-  { id: "rose", name: "गुलाबी व स्वर्ण", en: "Rose Gold", color: "#3d1326", accent: "#f3c78d" },
+const LINKS = [
+  { id: "top", key: "navHome", icon: "🏠" },
+  { id: "invitation", key: "navInvitation", icon: "💌" },
+  { id: "events", key: "navEvents", icon: "🪔" },
+  { id: "families", key: "navFamilies", icon: "👨‍👩‍👧" },
+  { id: "moments", key: "navMoments", icon: "📸" },
+  { id: "venue", key: "navVenue", icon: "📍" },
+  { id: "sharejoy", key: "navShare", icon: "💐" },
 ];
 
+/** Fixed top navbar: section links (a ☰ menu on phones), the active section highlighted, and the language switch. */
 export default function TopControls() {
-  const { lang, setLang } = useLanguage();
-  const [theme, setTheme] = useState<Theme>("crimson");
-  const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const { lang, setLang, t } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const [active, setActive] = useState("top");
 
   useEffect(() => {
-    const saved = (localStorage.getItem("wedding-theme") as Theme) || "crimson";
-    setTheme(saved);
-    document.documentElement.setAttribute("data-theme", saved);
+    const onScroll = () => {
+      setSolid(window.scrollY > 40);
+      // The last section whose top has passed the upper third of the screen is the current one.
+      const line = window.innerHeight * 0.35;
+      let current = "top";
+      for (const { id } of LINKS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const changeTheme = (newTheme: Theme) => {
-    setTheme(newTheme);
-    localStorage.setItem("wedding-theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    setIsThemeOpen(false);
+  // While the menu is open the page can't scroll; Escape closes it.
+  useEffect(() => {
+    if (!open) return;
+    const html = document.documentElement;
+    html.classList.add("nav-open");
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      html.classList.remove("nav-open");
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const go = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.documentElement.classList.remove("nav-open");
+    setOpen(false);
+    if (id === "top") window.scrollTo({ top: 0, behavior: "smooth" });
+    else document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <div className="top-controls-bar">
-      {/* Language Switcher: Hindi / English */}
-      <div className="lang-switcher" role="group" aria-label="Language selection">
-        <button
-          type="button"
-          className={`lang-btn ${lang === "hi" ? "is-active" : ""}`}
-          onClick={() => setLang("hi")}
-          aria-pressed={lang === "hi"}
-        >
-          <span className="lang-flag">🇮🇳</span>
-          <span>हिन्दी</span>
-        </button>
-        <button
-          type="button"
-          className={`lang-btn ${lang === "en" ? "is-active" : ""}`}
-          onClick={() => setLang("en")}
-          aria-pressed={lang === "en"}
-        >
-          <span className="lang-flag">🇬🇧</span>
-          <span>English</span>
-        </button>
-      </div>
+    <>
+      {/* Outside the nav: its backdrop-filter would make a fixed child size to the bar */}
+      <div className={`nav-backdrop ${open ? "is-on" : ""}`} onClick={() => setOpen(false)} aria-hidden="true" />
+      <nav className={`navbar ${solid || open ? "is-solid" : ""} ${open ? "is-open" : ""}`} aria-label="Sections">
+        <div className="nav-row">
+          <a className="nav-brand" href="#top" onClick={go("top")}>
+            R <span>♥</span> S
+          </a>
 
-      {/* Theme Switcher */}
-      <div className="theme-switcher-container">
-        <button
-          type="button"
-          className="theme-btn"
-          onClick={() => setIsThemeOpen((prev) => !prev)}
-          aria-label="Change color theme"
-          title="Color Theme"
-        >
-          <span className="theme-dot" style={{ backgroundColor: THEMES.find((t) => t.id === theme)?.accent }} />
-          <span className="theme-label">{lang === "hi" ? "थीम" : "Theme"}</span>
-          <span className="theme-arrow">{isThemeOpen ? "▲" : "▼"}</span>
-        </button>
-
-        {isThemeOpen && (
-          <div className="theme-menu">
-            <div className="theme-menu-title">
-              {lang === "hi" ? "कलर थीम चुनें" : "Select Color Theme"}
-            </div>
-            {THEMES.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className={`theme-opt ${theme === t.id ? "active" : ""}`}
-                onClick={() => changeTheme(t.id)}
-              >
-                <span className="theme-swatch" style={{ background: `linear-gradient(135deg, ${t.color}, ${t.accent})` }} />
-                <div className="theme-opt-info">
-                  <span className="theme-opt-hi">{t.name}</span>
-                  <span className="theme-opt-en">{t.en}</span>
-                </div>
-                {theme === t.id && <span className="theme-check">✓</span>}
-              </button>
+          <ul className="nav-links">
+            {LINKS.map((l, i) => (
+              <li key={l.id} style={{ "--i": i } as React.CSSProperties}>
+                <a href={`#${l.id}`} onClick={go(l.id)} className={active === l.id ? "is-active" : ""} aria-current={active === l.id ? "true" : undefined}>
+                  <span className="nav-ic" aria-hidden="true">{l.icon}</span>
+                  {t(l.key)}
+                </a>
+              </li>
             ))}
+          </ul>
+
+          <div className="lang-switcher" role="group" aria-label="Language">
+            <button type="button" className={`lang-btn ${lang === "hi" ? "is-active" : ""}`} onClick={() => setLang("hi")} aria-pressed={lang === "hi"}>
+              हिं
+            </button>
+            <button type="button" className={`lang-btn ${lang === "en" ? "is-active" : ""}`} onClick={() => setLang("en")} aria-pressed={lang === "en"}>
+              EN
+            </button>
           </div>
-        )}
-      </div>
-    </div>
+
+          <button type="button" className="nav-toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label="Menu">
+            <i />
+            <i />
+            <i />
+          </button>
+        </div>
+      </nav>
+    </>
   );
 }

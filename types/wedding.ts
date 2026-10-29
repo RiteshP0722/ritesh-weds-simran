@@ -1,66 +1,84 @@
+/** Text in both languages. */
+export interface L {
+  hi: string;
+  en: string;
+}
+
+export interface LineageLine {
+  /** e.g. सुपौत्र / सुपुत्र */
+  label: L;
+  name: L;
+}
+
 export interface Person {
-  name: string;
-  full: string;
+  /** Honorific shown before the name: चि. / सौ.कां. */
+  prefix: L;
+  /** Name as printed on the card (e.g. जग्गु) */
+  name: L;
+  /** Optional name in brackets (e.g. रितेश) */
+  alias?: L;
   photo: string;
-  /** Family lines; prefix with "*" to highlight */
-  lines: string[];
-  place: string;
+  lines: LineageLine[];
 }
 
 export interface WeddingEvent {
+  /** Must match a `days[].id` */
   day: string;
   icon: string;
-  title: string;
-  en: string;
+  title: L;
+  time: L;
+  /** Optional extra line, e.g. where / from whom */
+  note?: L;
+  /** Highlighted as the main ceremony */
+  main?: boolean;
+}
+
+export interface Day {
+  id: string;
+  label: L;
+  /** dd.mm.yyyy */
   date: string;
-  time: string;
-  note: string;
-  quote: string;
 }
 
 export interface FamilyGroup {
-  title: string;
-  sub: string;
-  names: string[];
-}
-
-export interface StoryItem {
-  photo: string;
-  en: string;
-  hi: string;
+  title: L;
+  /** Optional sub-headings inside one group (e.g. फूफाजी / जीजाजी) */
+  parts: { label?: L; names: string[] }[];
 }
 
 export interface Moment {
   photo: string;
-  cap: string;
+  cap: L;
 }
 
 export interface Venue {
-  name: string;
-  address: string;
-  /** Optional Google Maps link; falls back to a search for name + address */
+  name: L;
+  address: L;
+  /** Optional Google Maps link; falls back to a search for the address */
   map: string;
 }
 
 export interface WeddingData {
   groom: Person;
   bride: Person;
-  /** ISO local date-time in IST, e.g. "2026-12-11T18:00" */
+  /** ISO local date-time in IST of the शुभ लग्न, used by the countdown */
   datetime: string;
-  dateDots: string;
-  dateLong: string;
-  datePill: string;
-  timeText: string;
-  timeNote: string;
-  tagline: string;
-  lead: string;
-  venue: Venue;
-  whatsapp: string;
-  siteUrl: string;
+  dateText: L;
+  lagnaText: L;
+  invocation: L;
+  intro: L;
+  invite: L;
+  blessing: L;
+  days: Day[];
   events: WeddingEvent[];
+  feast: { title: L; date: L; time: L };
+  venue: Venue;
   families: FamilyGroup[];
-  storyQuote: string;
-  story: StoryItem[];
+  kidsRequest: { text: L; names: string };
+  senders: { names: L[]; address: L; phones: string[] };
+  /** Full-screen slideshow photos on the front page */
+  heroPhotos: string[];
   moments: Moment[];
-  footer: string;
+  /** Deployed link for the WhatsApp invite; "" uses the current page URL */
+  siteUrl: string;
 }

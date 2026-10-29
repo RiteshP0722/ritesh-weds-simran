@@ -5,12 +5,12 @@ import { prefersReducedMotion } from "@/lib/utils";
 
 // Auspicious Marigold (Genda) + Rose (Gulab) petals + Gold Dust sparkles
 const PETAL_COLORS = [
-  "#d90429", // Crimson Rose
-  "#c1121f", // Deep Rose
-  "#e63946", // Auspicious Red
-  "#ff9f1c", // Vibrant Marigold Orange
-  "#ffbf00", // Amber Marigold
-  "#ffd700", // Golden Yellow
+  "#f4b6c2", // Blush Rose
+  "#e88fa3", // Pink Rose
+  "#d4566e", // Deep Rose
+  "#f6c453", // Marigold
+  "#f2a516", // Marigold Orange
+  "#fff1c9", // Jasmine
 ];
 
 type Particle = {
@@ -40,9 +40,11 @@ export default function Petals() {
     const dpr = window.devicePixelRatio || 1;
     let W = 0, H = 0, raf = 0;
 
+    // Fills its parent (the hero), so petals never fall over the invitation text
     const resize = () => {
-      W = canvas.width = window.innerWidth * dpr;
-      H = canvas.height = window.innerHeight * dpr;
+      const box = canvas.parentElement?.getBoundingClientRect();
+      W = canvas.width = (box?.width || window.innerWidth) * dpr;
+      H = canvas.height = (box?.height || window.innerHeight) * dpr;
     };
     resize();
     window.addEventListener("resize", resize);
@@ -65,7 +67,7 @@ export default function Petals() {
       };
     };
 
-    const count = 28;
+    const count = 22;
     const particles: Particle[] = Array.from({ length: count }, () => createParticle(Math.random() * H));
 
     const draw = () => {

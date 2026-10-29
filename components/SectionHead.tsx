@@ -1,20 +1,20 @@
-import type { CSSProperties, ReactNode } from "react";
-
 interface Props {
   eyebrow: string;
   title: string;
-  top?: ReactNode;
-  bottom?: ReactNode;
-  style?: CSSProperties;
 }
 
-export default function SectionHead({ eyebrow, title, top, bottom, style }: Props) {
+/** Section heading: small caps eyebrow, script title, thin gold divider. */
+export default function SectionHead({ eyebrow, title }: Props) {
   return (
-    <div className="head rv" style={style}>
-      {top}
+    <div className="head rv">
+      <div className="head-ornament" aria-hidden="true">
+        ✦
+      </div>
       <div className="eyebrow">{eyebrow}</div>
       <h2 className="section-title">{title}</h2>
-      {bottom}
+      <div className="head-divider" aria-hidden="true">
+        <span />✦<span />
+      </div>
     </div>
   );
 }
