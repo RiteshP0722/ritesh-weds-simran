@@ -1,65 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import SectionHead from "./SectionHead";
 import Corners from "./Corners";
-import { mapUrl } from "@/lib/utils";
+import { mapEmbedUrl, mapUrl } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
 import type { WeddingData } from "@/types/wedding";
 
+/** स्नेहभोज with the venue, as on the card's front panel. */
 export default function Venue({ data }: { data: WeddingData }) {
-  const { lang, t } = useLanguage();
+  const { p, t } = useLanguage();
   const [copied, setCopied] = useState(false);
-  const url = mapUrl(data);
 
   const copyAddress = () => {
-    const full = `${data.venue.name}, ${data.venue.address}`;
-    navigator.clipboard.writeText(full).then(() => {
+    navigator.clipboard?.writeText(`${p(data.venue.name)}, ${p(data.venue.address)}`).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     });
   };
 
   return (
-    <section id="venue" className="venue-section">
-      <SectionHead
-        eyebrow={t("venueEyebrow")}
-        title={t("venueTitle")}
-        top={<div className="section-motif">🏰</div>}
-        bottom={<div className="sub">{t("venueSub")}</div>}
-      />
-
-      <div className="card venue-card frame rv">
+    <section id="venue" className="feast-section">
+      <div className="card paper feast-card frame tilt rv">
         <Corners />
-        <div className="map-view">
-          <div className="map-art" />
-          <div className="map-marker-wrap">
-            <span className="map-pulse" />
-            <span className="map-pin">📍</span>
-          </div>
-          <div className="map-badge">
-            <span>{t("venueBadge")}</span>
-          </div>
+        <div className="eyebrow">{t("feastEyebrow")}</div>
+        <div className="feast-plate" aria-hidden="true">
+          <span>🍛</span>
+        </div>
+        <h2 className="feast-title">{p(data.feast.title)}</h2>
+        <p className="feast-date">{p(data.feast.date)}</p>
+        <p className="feast-time">{p(data.feast.time)}</p>
+
+        <div className="feast-divider" aria-hidden="true">❖</div>
+
+        <div className="map-embed">
+          <iframe
+            title={t("venueLabel")}
+            src={mapEmbedUrl()}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
 
-        <div className="venue-details">
-          <div className="venue-eyebrow eyebrow">{t("venueTitle")}</div>
-          <h3 className="venue-title">{data.venue.name}</h3>
-          <p className="venue-address">{data.venue.address}</p>
+        <h3 className="feast-venue-label">{t("venueLabel")}</h3>
+        <p className="feast-venue">{p(data.venue.name)}</p>
+        <p className="feast-address">{p(data.venue.address)}</p>
 
-          <div className="venue-chips">
-            <span className="chip-item">📅 {lang === "hi" ? "11 दिसंबर 2026" : data.datePill}</span>
-            <span className="chip-item">🕕 {lang === "hi" ? "सायं 6:00 बजे" : data.timeText} ({t("timeNote")})</span>
-          </div>
-
-          <div className="venue-actions">
-            <a className="btn-royal btn-gold" href={url} target="_blank" rel="noopener noreferrer">
-              <span>{t("getDirections")}</span>
-            </a>
-            <button type="button" className="btn-royal btn-outline" onClick={copyAddress}>
-              <span>{copied ? t("addressCopied") : t("copyAddress")}</span>
-            </button>
-          </div>
+        <div className="btn-row">
+          <a className="btn-royal btn-gold" href={mapUrl(data)} target="_blank" rel="noopener noreferrer">
+            {t("getDirections")}
+          </a>
+          <button type="button" className="btn-royal btn-outline" onClick={copyAddress}>
+            {copied ? t("addressCopied") : t("copyAddress")}
+          </button>
         </div>
       </div>
     </section>
