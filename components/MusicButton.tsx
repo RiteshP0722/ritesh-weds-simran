@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { GATE_OPEN_EVENT } from "./Gate";
 
 // Single selected high-quality wedding song (Vivah - Mujhe Haq Hai / Wedding Theme)
 const PRIMARY_WEDDING_SONG = "https://archive.org/download/vivah-2006-movie-songs-hindiganadownload.com/Vivah/01%20muhje%20haq%20hai%20-%20hindiganadownload.com.mp3";
@@ -148,6 +149,15 @@ export default function MusicButton() {
         tryPrimary();
       });
   };
+
+  // Opening the doors is a tap, so the browser lets the song start then.
+  useEffect(() => {
+    const onOpen = () => {
+      if (!audioRef.current || audioRef.current.paused) startSong();
+    };
+    window.addEventListener(GATE_OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(GATE_OPEN_EVENT, onOpen);
+  });
 
   const toggle = () => {
     if (isPlaying) {
