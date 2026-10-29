@@ -516,16 +516,17 @@ html[lang="hi"] .footer-couple { font-family: var(--f-hi); font-size: 1.35rem; }
 /* ==========================================================================
    MUSIC
    ========================================================================== */
-.music-fab { position: fixed; right: 14px; bottom: 16px; z-index: 50; display: flex; align-items: center; gap: 8px; padding: 5px 14px 5px 5px; border-radius: 999px; background: rgba(52, 11, 26, 0.88); border: 1px solid var(--gold); color: var(--gold-soft); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); }
+.music-player-wrapper { position: fixed; right: 14px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 45; }
+.single-wedding-fab { display: flex; align-items: center; gap: 8px; padding: 5px 14px 5px 5px; border-radius: 999px; background: rgba(52, 11, 26, 0.88); border: 1px solid var(--gold); color: var(--gold-soft); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); backdrop-filter: blur(6px); }
 .music-icon-ring { position: relative; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--gold-border); }
-.music-fab.is-playing .music-icon-ring { animation: spinY 2s linear infinite; }
-.music-shehnai { font-size: 1.05rem; }
+.single-wedding-fab.is-playing .music-icon-ring { animation: spinY 2s linear infinite; }
+.shehnai-svg-icon { width: 22px; height: 22px; }
 .sound-waves { position: absolute; right: -6px; bottom: 2px; display: flex; gap: 2px; align-items: flex-end; height: 14px; }
 .sound-waves i { width: 3px; background: var(--marigold); border-radius: 2px; animation: waveBar 0.8s ease-in-out infinite; }
 .sound-waves i:nth-child(2) { animation-delay: 0.2s; }
 .sound-waves i:nth-child(3) { animation-delay: 0.4s; }
 @keyframes waveBar { 0%, 100% { height: 4px; } 50% { height: 14px; } }
-.music-label { font-size: 0.88rem; }
+.single-music-txt { font-size: 0.88rem; white-space: nowrap; }
 
 /* ==========================================================================
    SMALL SCREENS
@@ -541,8 +542,8 @@ html[lang="hi"] .footer-couple { font-family: var(--f-hi); font-size: 1.35rem; }
   .ev-coin { width: 48px; height: 48px; font-size: 1.35rem; }
   .ring-scene { height: 320px; }
   .hero-frame { inset: 72px 14px 14px; }
-  .music-label { display: none; }
-  .music-fab { padding: 5px; }
+  .single-music-txt { display: none; }
+  .single-wedding-fab { padding: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

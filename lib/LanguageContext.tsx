@@ -89,10 +89,6 @@ const DICTIONARY: Record<string, L> = {
   },
   footerFamily: { hi: "समस्त प्रजापति परिवार · पुनासा", en: "The Prajapati Family · Punasa" },
   backToTop: { hi: "▲ ऊपर जाएँ", en: "▲ Back to Top" },
-
-  // Music
-  musicPlay: { hi: "शहनाई ▶", en: "Shehnai ▶" },
-  musicPause: { hi: "संगीत ⏸", en: "Music ⏸" },
 };
 
 const LanguageContext = createContext<LanguageContextType>({
