@@ -19,6 +19,8 @@ const DICTIONARY: Record<string, L> = {
   gateWelcome: { hi: "स्वागतम्", en: "Welcome" },
   gateOpen: { hi: "निमंत्रण खोलें", en: "Open Invitation" },
   gateHint: { hi: "द्वार खोलने के लिए स्पर्श करें", en: "Tap to open the doors" },
+  dearGuest: { hi: "आदरणीय", en: "Dear" },
+  guestInvited: { hi: "आप सपरिवार सादर आमंत्रित हैं", en: "You and your family are warmly invited" },
 
   // Navbar
   navHome: { hi: "मुख्य", en: "Home" },
@@ -79,6 +81,12 @@ const DICTIONARY: Record<string, L> = {
   inviteWhatsApp: { hi: "WhatsApp पर निमंत्रण भेजें", en: "Send Invite on WhatsApp" },
   copyLink: { hi: "निमंत्रण लिंक कॉपी करें", en: "Copy Invitation Link" },
   linkCopied: { hi: "✓ लिंक कॉपी हो गया", en: "✓ Link Copied" },
+  guestNameLabel: { hi: "जिसे भेजना है उनका नाम लिखें", en: "Name of the guest you're inviting" },
+  guestNamePlaceholder: { hi: "जैसे: श्री राजेश जी शर्मा", en: "e.g. Shri Rajesh ji Sharma" },
+  guestNameHint: {
+    hi: "लिंक खोलते ही निमंत्रण पर उनका नाम दिखेगा",
+    en: "Their name will appear on the invitation when they open the link",
+  },
   sendersTitle: { hi: "प्रेषक", en: "Sent By" },
   call: { hi: "कॉल करें", en: "Call" },
 
