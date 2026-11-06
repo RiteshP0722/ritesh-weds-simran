@@ -24,9 +24,21 @@ export function groupEventsByDay(days: Day[], events: WeddingEvent[]) {
   return days.map((day) => ({ day, items: events.filter((e) => e.day === day.id) })).filter((g) => g.items.length);
 }
 
-export function inviteMessage(d: WeddingData, siteUrl: string): string {
+/** URL param that carries the guest's name in a personalised invitation link */
+export const GUEST_PARAM = "to";
+
+/** Invitation link that greets one guest by name when opened. */
+export function guestLink(siteUrl: string, guest: string): string {
+  const name = guest.trim();
+  if (!name) return siteUrl;
+  return `${siteUrl}${siteUrl.includes("?") ? "&" : "?"}${GUEST_PARAM}=${encodeURIComponent(name)}`;
+}
+
+export function inviteMessage(d: WeddingData, siteUrl: string, guest = ""): string {
   return (
-    `॥ श्री गणेशाय नमः ॥\n\n*शुभ विवाह*\n` +
+    `॥ श्री गणेशाय नमः ॥\n\n` +
+    (guest.trim() ? `आदरणीय *${guest.trim()}*,\n\n` : "") +
+    `*शुभ विवाह*\n` +
     `चि. ${d.groom.name.hi} (${d.groom.alias?.hi}) संग सौ.कां. ${d.bride.name.hi}\n\n` +
     `स्नेहभोज: ${d.feast.date.hi}, ${d.feast.time.hi}\n` +
     `स्थान: ${d.venue.name.hi}, ${d.venue.address.hi}\n` +

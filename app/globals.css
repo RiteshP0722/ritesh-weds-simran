@@ -151,6 +151,9 @@ html[lang="hi"] .seal-names { font-family: var(--f-hi); font-size: 1.3rem; color
 .seal-names span { padding: 0 4px; color: var(--rose); }
 .seal-btn { margin-top: 16px; padding: 12px 28px; border-radius: 999px; font-family: var(--f-hi); font-size: 1.05rem; color: var(--white); background: linear-gradient(135deg, #7a2442, var(--wine)); box-shadow: 0 0 0 2px var(--gold-soft), 0 10px 22px -6px rgba(90, 24, 48, 0.7); animation: pulse 2s ease-in-out infinite; }
 .seal-hint { margin-top: 12px; font-size: 0.85rem; color: var(--ink-soft); }
+.seal-guest { display: flex; flex-direction: column; gap: 2px; margin: 4px 0 8px; padding: 8px 12px; border-top: 1px dashed var(--gold-line); border-bottom: 1px dashed var(--gold-line); }
+.seal-guest strong { font-family: var(--f-hi); font-weight: 400; font-size: 1.45rem; line-height: 1.3; color: var(--wine); overflow-wrap: anywhere; }
+.seal-dear { font-family: var(--f-hi); font-size: 0.85rem; color: var(--rose); }
 @keyframes pulse { 50% { transform: scale(1.06); } }
 
 /* ==========================================================================
@@ -490,6 +493,12 @@ html[lang="hi"] .ring-card figcaption { font-family: var(--f-hi); font-size: 1.0
    ========================================================================== */
 .share-card { padding: 34px 22px; text-align: center; }
 .share-card .btn-row { margin-top: 4px; }
+.guest-field { display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 420px; margin: 0 auto 18px; }
+.guest-label { font-family: var(--f-hi); font-size: 1.1rem; color: var(--wine); }
+.guest-field input { width: 100%; padding: 12px 18px; border-radius: 999px; border: 1.5px solid var(--gold); background: var(--white); font-family: var(--f-hi); font-size: 1.05rem; color: var(--ink); text-align: center; outline: none; transition: box-shadow 0.25s; }
+.guest-field input:focus { box-shadow: 0 0 0 4px rgba(201, 160, 80, 0.25); }
+.guest-hint { font-size: 0.85rem; color: var(--ink-soft); }
+.guest-link { max-width: 420px; margin: -6px auto 16px; padding: 6px 12px; border-radius: 10px; background: var(--peach); font-size: 0.8rem; color: var(--ink-soft); overflow-wrap: anywhere; }
 .senders { margin-top: 28px; padding-top: 24px; border-top: 1px dashed var(--gold-line); }
 .senders-title { font-family: var(--f-hi); font-weight: 400; font-size: 1.5rem; color: var(--wine); }
 html[lang="en"] .senders-title { font-family: var(--f-script); font-size: 2.2rem; color: var(--gold-deep); }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useGuestName } from "@/lib/useGuestName";
 import type { WeddingData } from "@/types/wedding";
 
 /** Fired when the guest opens the doors; MusicButton listens and starts the shehnai. */
@@ -11,6 +12,7 @@ export const GATE_OPEN_EVENT = "wedding:gate-open";
 /** Full-screen palace doors, shown on every visit, that swing open in 3D only when tapped. */
 export default function Gate({ data }: { data: WeddingData }) {
   const { p, t } = useLanguage();
+  const guest = useGuestName();
   const [state, setState] = useState<"closed" | "opening" | "gone">("closed");
   const opened = useRef(false);
 
@@ -50,6 +52,13 @@ export default function Gate({ data }: { data: WeddingData }) {
         <div className="seal-coin">
           <span className="seal-om">ॐ</span>
         </div>
+        {guest && (
+          <div className="seal-guest">
+            <span className="seal-dear">{t("dearGuest")}</span>
+            <strong>{guest}</strong>
+            <span className="seal-dear">{t("guestInvited")}</span>
+          </div>
+        )}
         <div className="seal-title">{t("shubhVivah")}</div>
         <div className="seal-names">
           {p(data.groom.alias ?? data.groom.name)} <span>{t("sang")}</span> {p(data.bride.name)}

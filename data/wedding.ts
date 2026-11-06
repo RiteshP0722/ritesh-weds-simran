@@ -140,8 +140,8 @@ export const wedding: WeddingData = {
         {
           label: { hi: "फूफाजी", en: "Phoophaji" },
           names: [
-            "स्व. लक्ष्मण जी – सौ. कला बाई",
-            "स्व. राजाराम जी – सौ. राधा बाई",
+            "स्व. लक्ष्मण जी – श्रीमती कला बाई",
+            "स्व. राजाराम जी – श्रीमती राधा बाई",
             "भैयालाल जी – सौ. कृष्णा बाई",
             "गोपाल जी – सौ. शारदा बाई",
             "उमाशंकर जी – सौ. मीरा बाई",
@@ -163,6 +163,7 @@ export const wedding: WeddingData = {
             "महेश जी – सौ. सीमा बाई",
             "प्रदीप जी – सौ. शीतल बाई",
             "कुणाल जी प्रजापति",
+            "राजकुमारी, निशा",
             "एवं समस्त प्रजापति परिवार",
           ],
         },
@@ -175,7 +176,7 @@ export const wedding: WeddingData = {
           names: [
             "स्व. रामचरण जी – शांति बाई प्रजापति",
             "भागवत जी – सौ. कृष्णा बाई",
-            "हरिराम जी – सौ. स्व. रूपलता बाई",
+            "हरिराम जी – श्रीमती स्व. रूपलता बाई",
             "विष्णु जी – सौ. उर्मिला बाई",
             "प्रवीण जी – सौ. रुक्मणी बाई",
             "संजीव जी – सौ. उर्मिला बाई",
@@ -183,7 +184,7 @@ export const wedding: WeddingData = {
             "दिनेश जी – सौ. उर्मिला",
             "मोनू जी – सौ. पूनम",
             "सुमित जी – सौ. शिवानी",
-            "तुषार, आयुष, दीपांशु, मोहित",
+            "तुषार, आयुष, दीपांशु, मोहित, भारती, वंशिका",
           ],
         },
       ],
@@ -200,7 +201,6 @@ export const wedding: WeddingData = {
     names: [
       { hi: "श्री रामकरण जी प्रजापति", en: "Shri Ramkaran ji Prajapati" },
       { hi: "श्री महेश जी प्रजापति", en: "Shri Mahesh ji Prajapati" },
-      { hi: "श्री कृपाराम जी प्रजापति", en: "Shri Kriparam ji Prajapati" },
     ],
     address: { hi: "ग्राम पुनासा, जिला खंडवा (म.प्र.)", en: "Punasa, District Khandwa (M.P.)" },
     phones: ["9630216115", "7000842735"],
@@ -214,11 +214,9 @@ export const wedding: WeddingData = {
     { photo: "/photos/mehndi-look.jpg", cap: { hi: "मेहंदी", en: "Mehndi" } },
     { photo: "/photos/sagai-look.jpg", cap: { hi: "सगाई", en: "Engagement" } },
     { photo: "/photos/reception-look.jpg", cap: { hi: "स्नेहभोज", en: "Reception" } },
-    { photo: "/photos/groom-sherwani.jpg", cap: { hi: "दूल्हे राजा", en: "The Groom" } },
-    { photo: "/photos/groom-jodhpuri.jpg", cap: { hi: "शाही अंदाज़", en: "Royal Look" } },
-    { photo: "/photos/groom-bandi.jpg", cap: { hi: "रितेश", en: "Ritesh" } },
     { photo: "/photos/couple.jpg", cap: { hi: "हम दोनों", en: "Together Forever" } },
-    { photo: "/photos/simran-closeup.jpg", cap: { hi: "सिमरन", en: "Simran" } },
+    { photo: "/photos/pheras.jpg", cap: { hi: "सात फेरे", en: "Saat Phere" } },
+    { photo: "/photos/ring.jpg", cap: { hi: "अंगूठी रस्म", en: "Ring Ceremony" } },
   ],
 
   siteUrl: "",
