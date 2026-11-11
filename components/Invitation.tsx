@@ -5,17 +5,19 @@ import Countdown from "./Countdown";
 import PersonCard from "./PersonCard";
 import SectionHead from "./SectionHead";
 import { useLanguage } from "@/lib/LanguageContext";
+import { couple, shortName } from "@/lib/utils";
 import type { WeddingData } from "@/types/wedding";
 
 /** Card page 2: Vishnu mangalam, the invitation text, bride & groom, countdown. */
 export default function Invitation({ data }: { data: WeddingData }) {
   const { p, t } = useLanguage();
+  const [first, second] = couple(data);
 
   const downloadCalendar = () => {
     const start = new Date(`${data.datetime}:00+05:30`);
     const end = new Date(start.getTime() + 3 * 36e5);
     const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
-    const title = `${data.groom.alias?.en ?? data.groom.name.en} weds ${data.bride.name.en} - Shubh Lagna`;
+    const title = `${shortName(first, "en")} weds ${shortName(second, "en")} - ${data.lagnaText.en}`;
     const ics = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
@@ -24,7 +26,7 @@ export default function Invitation({ data }: { data: WeddingData }) {
       `UID:${stamp(start)}@ritesh-weds-simran`,
       `DTSTAMP:${stamp(new Date())}`,
       `SUMMARY:${title}`,
-      "LOCATION:Indore, Madhya Pradesh",
+      `LOCATION:${data.venue.mapQuery.replace(/,/g, "\\,")}`,
       `DTSTART:${stamp(start)}`,
       `DTEND:${stamp(end)}`,
       "END:VEVENT",
@@ -33,7 +35,7 @@ export default function Invitation({ data }: { data: WeddingData }) {
     const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Ritesh-weds-Simran.ics";
+    a.download = `${shortName(first, "en")}-weds-${shortName(second, "en")}.ics`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -48,12 +50,12 @@ export default function Invitation({ data }: { data: WeddingData }) {
         <p className="invite-intro">{p(data.intro)}</p>
 
         <div className="couple-grid">
-          <PersonCard person={data.groom} label={t("groomLabel")} />
+          <PersonCard person={first} label={t(first === data.groom ? "groomLabel" : "brideLabel")} />
           <div className="couple-sang" aria-hidden="true">
             <span className="sang-hands">🤝</span>
             <span className="sang-word">{t("sang")}</span>
           </div>
-          <PersonCard person={data.bride} label={t("brideLabel")} />
+          <PersonCard person={second} label={t(second === data.groom ? "groomLabel" : "brideLabel")} />
         </div>
 
         <p className="invite-main">{p(data.invite)}</p>
@@ -62,7 +64,7 @@ export default function Invitation({ data }: { data: WeddingData }) {
 
       <div className="count-wrap frame rv">
         <Corners />
-        <div className="eyebrow">{t("countdownEyebrow")}</div>
+        <div className="eyebrow">{p(data.countdownLabel)}</div>
         <Countdown datetime={data.datetime} />
         <div className="count-foot">
           <span className="pill">{p(data.dateText)}</span>

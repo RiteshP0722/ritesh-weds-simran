@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useSide } from "@/lib/SideContext";
+import type { Side } from "@/types/wedding";
 
 const LINKS = [
   { id: "top", key: "navHome", icon: "🏠" },
@@ -16,6 +18,7 @@ const LINKS = [
 /** Fixed top navbar: section links (a ☰ menu on phones), the active section highlighted, and the language switch. */
 export default function TopControls() {
   const { lang, setLang, t } = useLanguage();
+  const { side, setSide } = useSide();
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const [active, setActive] = useState("top");
@@ -50,6 +53,14 @@ export default function TopControls() {
     };
   }, [open]);
 
+  // Switching card: show the new card from its start, with the invitation in view
+  const pickSide = (s: Side) => {
+    if (s === side) return;
+    setSide(s);
+    setOpen(false);
+    requestAnimationFrame(() => document.getElementById("invitation")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+
   const go = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     document.documentElement.classList.remove("nav-open");
@@ -65,7 +76,7 @@ export default function TopControls() {
       <nav className={`navbar ${solid || open ? "is-solid" : ""} ${open ? "is-open" : ""}`} aria-label="Sections">
         <div className="nav-row">
           <a className="nav-brand" href="#top" onClick={go("top")}>
-            R <span>♥</span> S
+            {side === "bride" ? "S" : "R"} <span>♥</span> {side === "bride" ? "R" : "S"}
           </a>
 
           <ul className="nav-links">
@@ -78,6 +89,21 @@ export default function TopControls() {
               </li>
             ))}
           </ul>
+
+          <div className="lang-switcher side-switcher" role="group" aria-label={t("sideLabel")}>
+            {(["groom", "bride"] as const).map((s) => (
+              <button
+                key={s}
+                type="button"
+                className={`lang-btn ${side === s ? "is-active" : ""}`}
+                onClick={() => pickSide(s)}
+                aria-pressed={side === s}
+              >
+                {t(s === "groom" ? "sideGroom" : "sideBride")}
+                <span className="side-long"> {t("sidePaksh")}</span>
+              </button>
+            ))}
+          </div>
 
           <div className="lang-switcher" role="group" aria-label="Language">
             <button type="button" className={`lang-btn ${lang === "hi" ? "is-active" : ""}`} onClick={() => setLang("hi")} aria-pressed={lang === "hi"}>

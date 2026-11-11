@@ -35,7 +35,7 @@ export default function Venue({ data }: { data: WeddingData }) {
         <div className="map-embed">
           <iframe
             title={t("venueLabel")}
-            src={mapEmbedUrl()}
+            src={mapEmbedUrl(data)}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
