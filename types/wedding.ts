@@ -54,17 +54,26 @@ export interface Moment {
 export interface Venue {
   name: L;
   address: L;
-  /** Optional Google Maps link; falls back to a search for the address */
+  /** Optional Google Maps link; falls back to a search for `mapQuery` */
   map: string;
+  /** Text searched on Google Maps for the embedded map and the directions button */
+  mapQuery: string;
 }
 
+/** Whose invitation card this is: the groom's family (वर पक्ष) or the bride's family (वधू पक्ष). */
+export type Side = "groom" | "bride";
+
 export interface WeddingData {
+  /** Whose card this is; that person's name is shown first everywhere */
+  side: Side;
   groom: Person;
   bride: Person;
   /** ISO local date-time in IST of the शुभ लग्न, used by the countdown */
   datetime: string;
   dateText: L;
   lagnaText: L;
+  /** Heading above the countdown, e.g. शुभ लग्न में शेष समय */
+  countdownLabel: L;
   invocation: L;
   intro: L;
   invite: L;
@@ -74,10 +83,16 @@ export interface WeddingData {
   feast: { title: L; date: L; time: L };
   venue: Venue;
   families: FamilyGroup[];
-  kidsRequest: { text: L; names: string };
+  kidsRequest: { title: L; text: L; names: string };
   senders: { names: L[]; address: L; phones: string[] };
-  /** Full-screen slideshow photos on the front page */
-  heroPhotos: string[];
+  /** Family line in the footer and at the end of the WhatsApp message */
+  familyLine: L;
+  /**
+   * Full-screen slideshow photos on the front page.
+   * Use { src, fit: "whole" } for a small or wide photo: it is shown complete over a blurred copy
+   * of itself instead of being zoomed to fill the screen (which crops and blurs it on phones).
+   */
+  heroPhotos: (string | { src: string; fit: "whole" })[];
   moments: Moment[];
   /** Deployed link for the WhatsApp invite; "" uses the current page URL */
   siteUrl: string;

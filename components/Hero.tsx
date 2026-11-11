@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Petals from "./Petals";
-import { prefersReducedMotion } from "@/lib/utils";
+import { couple, prefersReducedMotion, shortName } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
 import type { WeddingData } from "@/types/wedding";
 
@@ -13,8 +13,10 @@ import type { WeddingData } from "@/types/wedding";
  */
 export default function Hero({ data }: { data: WeddingData }) {
   const { p, t } = useLanguage();
-  const { groom, bride } = data;
-  const photos = data.heroPhotos.filter(Boolean);
+  const [first, second] = couple(data);
+  const photos = data.heroPhotos
+    .map((ph) => (typeof ph === "string" ? { src: ph, whole: false } : { src: ph.src, whole: ph.fit === "whole" }))
+    .filter((ph) => ph.src);
   const [slide, setSlide] = useState(0);
   const ref = useRef<HTMLElement>(null);
 
@@ -57,9 +59,16 @@ export default function Hero({ data }: { data: WeddingData }) {
     <header className="hero" id="top" ref={ref}>
       <div className="hero-sticky">
         <div className="hero-slides" aria-hidden="true">
-          {photos.map((src, i) => (
-            <div key={src} className={`hero-slide ${i === slide ? "on" : ""}`} style={{ backgroundImage: `url(${src})` }} />
-          ))}
+          {photos.map(({ src, whole }, i) =>
+            whole ? (
+              <div key={src} className={`hero-slide is-whole ${i === slide ? "on" : ""}`}>
+                <div className="hs-blur" style={{ backgroundImage: `url(${src})` }} />
+                <div className="hs-img" style={{ backgroundImage: `url(${src})` }} />
+              </div>
+            ) : (
+              <div key={src} className={`hero-slide ${i === slide ? "on" : ""}`} style={{ backgroundImage: `url(${src})` }} />
+            )
+          )}
         </div>
         <div className="hero-shade" aria-hidden="true" />
         <Petals />
@@ -77,11 +86,21 @@ export default function Hero({ data }: { data: WeddingData }) {
           <div className="hero-main">
             <div className="hero-eyebrow">{t("heroEyebrow")}</div>
             <h1 className="hero-names">
-              {groom.alias?.en ?? groom.name.en} <span className="amp">&amp;</span> {bride.name.en}
+              {shortName(first, "en")} <span className="amp">&amp;</span> {shortName(second, "en")}
             </h1>
             <p className="hero-hindi">
-              {p(groom.prefix)} {p(groom.name)}
-              {groom.alias && ` (${p(groom.alias)})`} <em>{t("sang")}</em> {p(bride.prefix)} {p(bride.name)}
+              {[first, second].map((x, i) => (
+                <span key={i}>
+                  {i > 0 && (
+                    <>
+                      {" "}
+                      <em>{t("sang")}</em>{" "}
+                    </>
+                  )}
+                  {p(x.prefix)} {p(x.name)}
+                  {x.alias && ` (${p(x.alias)})`}
+                </span>
+              ))}
             </p>
           </div>
           <div className="hero-details">

@@ -3,20 +3,22 @@
 import { useEffect, useState } from "react";
 import Corners from "./Corners";
 import SectionHead from "./SectionHead";
-import { guestLink, inviteMessage } from "@/lib/utils";
+import { guestLink, inviteMessage, SIDE_PARAM } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
 import type { WeddingData } from "@/types/wedding";
 
 export default function ShareJoy({ data }: { data: WeddingData }) {
   const { p, t } = useLanguage();
-  const [siteUrl, setSiteUrl] = useState(data.siteUrl);
+  const [baseUrl, setBaseUrl] = useState(data.siteUrl);
   const [copied, setCopied] = useState(false);
   const [guest, setGuest] = useState("");
 
   useEffect(() => {
-    if (!data.siteUrl) setSiteUrl(window.location.origin + window.location.pathname);
+    if (!data.siteUrl) setBaseUrl(window.location.origin + window.location.pathname);
   }, [data.siteUrl]);
 
+  // The bride's family shares links that open their own card
+  const siteUrl = baseUrl && data.side === "bride" ? `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}${SIDE_PARAM}=bride` : baseUrl;
   const link = guestLink(siteUrl, guest);
   const shareHref = "https://api.whatsapp.com/send?text=" + encodeURIComponent(inviteMessage(data, link, guest));
 
