@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "@/lib/utils";
+import { couple, prefersReducedMotion } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useGuestName } from "@/lib/useGuestName";
 import type { WeddingData } from "@/types/wedding";
@@ -13,6 +13,7 @@ export const GATE_OPEN_EVENT = "wedding:gate-open";
 export default function Gate({ data }: { data: WeddingData }) {
   const { p, t } = useLanguage();
   const guest = useGuestName();
+  const [first, second] = couple(data);
   const [state, setState] = useState<"closed" | "opening" | "gone">("closed");
   const opened = useRef(false);
 
@@ -61,7 +62,7 @@ export default function Gate({ data }: { data: WeddingData }) {
         )}
         <div className="seal-title">{t("shubhVivah")}</div>
         <div className="seal-names">
-          {p(data.groom.alias ?? data.groom.name)} <span>{t("sang")}</span> {p(data.bride.name)}
+          {p(first.alias ?? first.name)} <span>{t("sang")}</span> {p(second.alias ?? second.name)}
         </div>
         {/* Click bubbles to the gate's handler */}
         <button type="button" className="seal-btn" autoFocus>

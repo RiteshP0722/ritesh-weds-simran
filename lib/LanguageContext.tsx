@@ -30,6 +30,10 @@ const DICTIONARY: Record<string, L> = {
   navMoments: { hi: "अनमोल पल", en: "Moments" },
   navVenue: { hi: "स्थान", en: "Venue" },
   navShare: { hi: "आमंत्रण भेजें", en: "Share" },
+  sideLabel: { hi: "किस पक्ष का निमंत्रण", en: "Whose invitation" },
+  sideGroom: { hi: "वर", en: "Groom" },
+  sideBride: { hi: "वधू", en: "Bride" },
+  sidePaksh: { hi: "पक्ष", en: "Side" },
 
   // Hero
   shreeGanesh: { hi: "॥ श्री गणेशाय नमः ॥", en: "॥ Shree Ganeshay Namah ॥" },
@@ -48,7 +52,6 @@ const DICTIONARY: Record<string, L> = {
   inviteTitle: { hi: "स्नेहल निमंत्रण", en: "Loving Invitation" },
   groomLabel: { hi: "वर", en: "The Groom" },
   brideLabel: { hi: "वधू", en: "The Bride" },
-  countdownEyebrow: { hi: "शुभ लग्न में शेष समय", en: "Counting Down To The Wedding" },
   days: { hi: "दिन", en: "Days" },
   hours: { hi: "घंटे", en: "Hours" },
   mins: { hi: "मिनट", en: "Mins" },
@@ -69,7 +72,6 @@ const DICTIONARY: Record<string, L> = {
   // Families
   familiesEyebrow: { hi: "स्नेहाकांक्षी परिवारजन", en: "With Love From Our Families" },
   familiesTitle: { hi: "हमारे परिवार", en: "Our Families" },
-  kidsTitle: { hi: "बाल आग्रह", en: "A Request From The Kids" },
 
   // Moments
   momentsEyebrow: { hi: "सुखद स्मृतियाँ", en: "Glimpses of Joy" },
@@ -95,7 +97,6 @@ const DICTIONARY: Record<string, L> = {
     hi: "शुभं करोति कल्याणम् आरोग्यं धनसम्पदा।\nशत्रुबुद्धिविनाशाय दीपज्योतिर्नमोऽस्तु ते॥",
     en: "May this light bring auspiciousness, health and prosperity to all.",
   },
-  footerFamily: { hi: "समस्त प्रजापति परिवार · पुनासा", en: "The Prajapati Family · Punasa" },
   backToTop: { hi: "▲ ऊपर जाएँ", en: "▲ Back to Top" },
 };
 

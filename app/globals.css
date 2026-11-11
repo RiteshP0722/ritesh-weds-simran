@@ -176,6 +176,10 @@ html[lang="en"] .nav-links a { font-family: var(--f-serif); font-size: 0.9rem; l
 .lang-switcher { display: flex; flex-shrink: 0; padding: 3px; border-radius: 999px; background: rgba(255, 250, 243, 0.9); border: 1px solid var(--gold-soft); box-shadow: 0 6px 18px rgba(52, 11, 26, 0.25); }
 .lang-btn { padding: 4px 11px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); transition: 0.25s; }
 .lang-btn.is-active { background: var(--wine); color: var(--gold-soft); }
+.side-switcher .lang-btn { font-family: var(--f-hi); white-space: nowrap; }
+html[lang="en"] .side-switcher .lang-btn { font-family: var(--f-body); }
+@media (max-width: 899px) { .side-switcher { margin-left: auto; } .side-switcher + .lang-switcher { margin-left: 0; } }
+@media (max-width: 440px) { .side-long { display: none; } .nav-row { gap: 8px; padding: 0 10px; } .lang-btn { padding: 4px 9px; } }
 .nav-toggle { display: none; flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--gold-line); background: rgba(52, 11, 26, 0.55); flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .nav-toggle i { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--gold-soft); transition: transform 0.3s ease, opacity 0.3s ease; }
 .navbar.is-open .nav-toggle i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -239,12 +243,12 @@ html[lang="hi"] .section-title { font-family: var(--f-hi); font-size: clamp(2.1r
 .cn.c { bottom: 12px; left: 12px; transform: scaleY(-1); }
 .cn.d { bottom: 12px; right: 12px; transform: scale(-1); }
 
+/* Cards stay flat (transform: none) at rest so photos and text are drawn at full sharpness;
+   the 3D lean only applies while the pointer is actually tilting the card. */
 .tilt {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.9s ease, box-shadow 0.4s ease;
 }
-.tilt.is-tilting { transition: transform 0.12s linear, opacity 0.9s ease, box-shadow 0.4s ease; box-shadow: 0 30px 50px -22px rgba(90, 24, 48, 0.5); }
+.tilt.is-tilting { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d; transition: transform 0.12s linear, opacity 0.9s ease, box-shadow 0.4s ease; box-shadow: 0 30px 50px -22px rgba(90, 24, 48, 0.5); }
 .rv { transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.9s ease; }
 .rv.pre { opacity: 0; transform: perspective(900px) rotateX(22deg) translateY(46px) scale(0.97); }
 
@@ -270,12 +274,16 @@ html[lang="hi"] .btn-royal { font-family: var(--f-hi); }
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center 22%;
+  background-position: center 40%;
   opacity: 0;
   transform: scale(1.14);
   transition: opacity 1.6s ease, transform 7s ease-out;
 }
 .hero-slide.on { opacity: 1; transform: scale(1); }
+/* "whole" slides: the complete photo, sitting over a soft blurred copy that fills the screen */
+.hero-slide.is-whole { overflow: hidden; }
+.hs-blur { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(22px) brightness(0.75) saturate(1.2); }
+.hs-img { position: absolute; inset: 0; background-size: contain; background-repeat: no-repeat; background-position: center 34%; }
 .hero-shade {
   position: absolute;
   inset: 0;
@@ -349,9 +357,10 @@ html[lang="hi"] .sang-word { font-family: var(--f-hi); font-size: 1.4rem; color:
   padding: 5px;
   background: var(--gold-border);
   box-shadow: 0 22px 34px -16px rgba(90, 24, 48, 0.55);
-  transform: translateZ(40px);
+  /* Without this a taller photo (e.g. 2:3) stretches the frame past 4:5 and the two cards stop lining up */
+  overflow: hidden;
 }
-.person-arch img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 999px 999px 12px 12px; }
+.person-arch img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 999px 999px 12px 12px; }
 .fallback-initial { display: grid; place-items: center; height: 100%; font-family: var(--f-script); font-size: 3rem; color: var(--white); }
 .person-label { margin-top: 14px; padding: 1px 14px; border-radius: 999px; background: var(--wine); color: var(--gold-soft); font-size: 0.85rem; transform: translateZ(30px); }
 .person-name { margin-top: 4px; font-family: var(--f-hi); font-weight: 400; font-size: 1.75rem; line-height: 1.35; color: var(--wine); transform: translateZ(30px); }
@@ -446,7 +455,10 @@ html[lang="hi"] .feast-venue { font-family: var(--f-hi); }
 /* ==========================================================================
    FAMILIES
    ========================================================================== */
-.fam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+/* Two equal columns; flex (not grid) so an odd last card sits centred instead of leaving a gap on the right */
+.fam-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.fam-grid > .fam-card { flex: 0 1 calc((100% - 18px) / 2); min-width: 0; }
+@media (max-width: 620px) { .fam-grid > .fam-card { flex-basis: 100%; } }
 .fam-card { padding: 34px 22px 28px; text-align: center; }
 .fam-title { font-family: var(--f-hi); font-weight: 400; font-size: 1.6rem; color: var(--wine); margin-bottom: 10px; transform: translateZ(30px); }
 html[lang="en"] .fam-title { font-family: var(--f-script); font-size: 2.2rem; color: var(--gold-deep); }
@@ -512,7 +524,8 @@ html[lang="en"] .senders-title { font-family: var(--f-script); font-size: 2.2rem
    FOOTER
    ========================================================================== */
 .wedding-footer { position: relative; padding: 56px 20px 90px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; background: radial-gradient(circle, rgba(234, 215, 174, 0.12) 0 1.2px, transparent 1.7px) 0 0 / 22px 22px, var(--wine-deep); color: var(--gold-soft); }
-.wedding-footer::before { left: 0; right: 0; }
+/* The footer is already full width: undo the shared 100vw + centring shift, which pushed half the scallops off-screen */
+.wedding-footer::before { left: 0; right: 0; width: auto; translate: none; }
 .footer-ornament { font-size: 1.2rem; color: var(--gold); }
 .footer-blessing { white-space: pre-line; font-family: var(--f-hi); font-size: 0.98rem; opacity: 0.85; }
 .footer-fam-name { font-family: var(--f-hi); font-weight: 400; font-size: 1.3rem; color: var(--gold); }
@@ -551,6 +564,14 @@ html[lang="hi"] .footer-couple { font-family: var(--f-hi); font-size: 1.35rem; }
   .ev-coin { width: 48px; height: 48px; font-size: 1.35rem; }
   .ring-scene { height: 320px; }
   .hero-frame { inset: 72px 14px 14px; }
+  .hero-ganesh { font-size: 1.1rem; }
+  html[lang="hi"] .hero-eyebrow { font-size: 1.15rem; }
+  .hero-eyebrow { font-size: 0.88rem; }
+  .hero-names { font-size: clamp(3rem, 14.5vw, 5.6rem); }
+  .hero-hindi { font-size: 1.18rem; }
+  .hero-date { font-size: 1.5rem; }
+  .hero-lagna { font-size: 1.15rem; }
+  .hero-quote { font-size: 1.15rem; }
   .single-music-txt { display: none; }
   .single-wedding-fab { padding: 5px; }
 }

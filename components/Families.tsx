@@ -35,7 +35,7 @@ export default function Families({ data }: { data: WeddingData }) {
         <div className="kids-balloons" aria-hidden="true">
           🎈<span>🎈</span>🎈
         </div>
-        <h4 className="kids-title">{t("kidsTitle")}</h4>
+        <h4 className="kids-title">{p(data.kidsRequest.title)}</h4>
         <p className="kids-text">{p(data.kidsRequest.text)}</p>
         <p className="kids-names">— {data.kidsRequest.names}</p>
       </div>
