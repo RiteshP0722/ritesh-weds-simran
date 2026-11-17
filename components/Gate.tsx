@@ -17,6 +17,12 @@ export default function Gate({ data }: { data: WeddingData }) {
   const [state, setState] = useState<"closed" | "opening" | "gone">("closed");
   const opened = useRef(false);
 
+  // The doors open onto the start of the card: stop the browser restoring the old scroll spot on reload.
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     document.documentElement.classList.toggle("gate-locked", state !== "gone");
     return () => document.documentElement.classList.remove("gate-locked");
@@ -25,6 +31,7 @@ export default function Gate({ data }: { data: WeddingData }) {
   const open = () => {
     if (opened.current) return;
     opened.current = true;
+    window.scrollTo(0, 0);
     window.dispatchEvent(new Event(GATE_OPEN_EVENT));
     setState("opening");
     setTimeout(() => setState("gone"), prefersReducedMotion() ? 300 : 2200);

@@ -49,6 +49,29 @@ export interface FamilyGroup {
 export interface Moment {
   photo: string;
   cap: L;
+  /** Landscape photo: gets a wider, square card in the iPad/desktop strip */
+  wide?: boolean;
+}
+
+/** A temple visit the couple made together, shown in the "आस्था की यात्रा" section. */
+export interface Journey {
+  photo: string;
+  icon: string;
+  place: L;
+  /** Optional, e.g. 28 नवंबर 2024 */
+  date?: L;
+  line: L;
+}
+
+/** A polaroid in the "दर्शन डायरी" scrapbook. */
+export interface DiaryPhoto {
+  photo: string;
+  cap: L;
+  place?: L;
+  /** Camera-style date stamp on the photo, e.g. 26.04.25 */
+  stamp?: string;
+  /** Landscape photo: spans two columns */
+  wide?: boolean;
 }
 
 export interface Venue {
@@ -91,9 +114,13 @@ export interface WeddingData {
    * Full-screen slideshow photos on the front page.
    * Use { src, fit: "whole" } for a small or wide photo: it is shown complete over a blurred copy
    * of itself instead of being zoomed to fill the screen (which crops and blurs it on phones).
+   * `focus` is the CSS background-position kept in view when the photo fills a wide screen,
+   * e.g. "50% 80%" to keep faces low in a tall photo on a laptop.
    */
-  heroPhotos: (string | { src: string; fit: "whole" })[];
+  heroPhotos: (string | { src: string; fit?: "whole"; focus?: string })[];
   moments: Moment[];
+  journeys: Journey[];
+  diary: DiaryPhoto[];
   /** Deployed link for the WhatsApp invite; "" uses the current page URL */
   siteUrl: string;
 }

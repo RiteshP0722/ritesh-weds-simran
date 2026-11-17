@@ -21,11 +21,19 @@ export default function TopControls() {
   const { side, setSide } = useSide();
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [active, setActive] = useState("top");
 
   useEffect(() => {
+    let lastY = window.scrollY;
     const onScroll = () => {
-      setSolid(window.scrollY > 40);
+      const y = window.scrollY;
+      setSolid(y > 40);
+      // Scrolling down slides the bar away; any scroll up brings it back.
+      if (Math.abs(y - lastY) > 6) {
+        setHidden(y > lastY && y > 80);
+        lastY = y;
+      }
       // The last section whose top has passed the upper third of the screen is the current one.
       const line = window.innerHeight * 0.35;
       let current = "top";
@@ -73,7 +81,7 @@ export default function TopControls() {
     <>
       {/* Outside the nav: its backdrop-filter would make a fixed child size to the bar */}
       <div className={`nav-backdrop ${open ? "is-on" : ""}`} onClick={() => setOpen(false)} aria-hidden="true" />
-      <nav className={`navbar ${solid || open ? "is-solid" : ""} ${open ? "is-open" : ""}`} aria-label="Sections">
+      <nav className={`navbar ${solid || open ? "is-solid" : ""} ${open ? "is-open" : ""} ${hidden && !open ? "is-hidden" : ""}`} aria-label="Sections">
         <div className="nav-row">
           <a className="nav-brand" href="#top" onClick={go("top")}>
             {side === "bride" ? "S" : "R"} <span>♥</span> {side === "bride" ? "R" : "S"}
