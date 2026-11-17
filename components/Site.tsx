@@ -7,7 +7,10 @@ import Events from "./Events";
 import Venue from "./Venue";
 import Families from "./Families";
 import Moments from "./Moments";
+import Yatra from "./Yatra";
+import Diary from "./Diary";
 import ShareJoy from "./ShareJoy";
+import Shayari from "./Shayari";
 import Footer from "./Footer";
 import { useSide } from "@/lib/SideContext";
 
@@ -20,10 +23,15 @@ export default function Site() {
       <Hero data={d} />
       <main className="wrap">
         <Invitation data={d} />
+        <Shayari id="rasm" />
         <Events days={d.days} events={d.events} />
         <Families data={d} />
+        <Shayari id="pal" />
         <Moments moments={d.moments} />
+        <Yatra journeys={d.journeys} />
+        <Diary photos={d.diary} />
         <Venue data={d} />
+        <Shayari id="raah" />
         <ShareJoy data={d} />
       </main>
       <Footer data={d} />

@@ -214,17 +214,123 @@ export const groomSide: WeddingData = {
   },
   familyLine: { hi: "समस्त प्रजापति परिवार · पुनासा", en: "The Prajapati Family · Punasa" },
 
-  heroPhotos: ["/photos/ring.jpg", "/photos/haath-pakad.jpg"],
+  heroPhotos: [
+    { src: "/photos/hero-ghat.jpg", focus: "50% 47%" },
+    { src: "/photos/hero-ped.jpg", focus: "50% 40%" },
+    { src: "/photos/hero-pallu.jpg", focus: "50% 45%" },
+    { src: "/photos/hero-deewar.jpg", focus: "50% 82%" },
+    "/photos/ring.jpg",
+  ],
   moments: [
-    { photo: "/photos/dulha-dulhan.jpg", cap: { hi: "दूल्हा-दुल्हन", en: "The Bride & Groom" } },
-    { photo: "/photos/vivah-look.jpg", cap: { hi: "शुभ विवाह", en: "Wedding" } },
-    { photo: "/photos/haldi-look.jpg", cap: { hi: "हल्दी", en: "Haldi" } },
-    { photo: "/photos/mehndi-look.jpg", cap: { hi: "मेहंदी", en: "Mehndi" } },
-    { photo: "/photos/sagai-look.jpg", cap: { hi: "सगाई", en: "Engagement" } },
-    { photo: "/photos/reception-look.jpg", cap: { hi: "स्नेहभोज", en: "Reception" } },
-    { photo: "/photos/couple.jpg", cap: { hi: "हम दोनों", en: "Together Forever" } },
-    { photo: "/photos/pheras.jpg", cap: { hi: "सात फेरे", en: "Saat Phere" } },
-    { photo: "/photos/ring.jpg", cap: { hi: "अंगूठी रस्म", en: "Ring Ceremony" } },
+    { photo: "/photos/pal-seedhi.jpg", cap: { hi: "प्यार भरी नज़र", en: "That Look" } },
+    { photo: "/photos/pal-bagicha.jpg", cap: { hi: "साथ-साथ", en: "Side by Side" } },
+    { photo: "/photos/pal-nazar.jpg", cap: { hi: "पेड़ों की छाँव में", en: "Under the Trees" } },
+    { photo: "/photos/pal-mandir.jpg", cap: { hi: "मंदिर दर्शन", en: "Blessed Together" } },
+    { photo: "/photos/pal-selfie.jpg", cap: { hi: "मुस्कान", en: "All Smiles" } },
+    { photo: "/photos/pal-balloon.jpg", cap: { hi: "जश्न के पल", en: "Celebrations" }, wide: true },
+  ],
+
+  journeys: [
+    {
+      photo: "/photos/yatra-mahakal.jpg",
+      icon: "🔱",
+      place: { hi: "श्री महाकालेश्वर, उज्जैन", en: "Shri Mahakaleshwar, Ujjain" },
+      line: { hi: "महाकाल के आँगन में थामा एक-दूजे का हाथ", en: "Hand in hand in Mahakal's courtyard" },
+    },
+    {
+      photo: "/photos/yatra-omkareshwar.jpg",
+      icon: "🌊",
+      place: { hi: "ओंकारेश्वर, नर्मदा तट", en: "Omkareshwar, on the Narmada" },
+      line: { hi: "माँ नर्मदा की लहरों के साक्षी में बँधा ये साथ", en: "A bond tied with Maa Narmada as witness" },
+    },
+    {
+      photo: "/photos/yatra-mandir.jpg",
+      icon: "🌼",
+      place: { hi: "खजराना गणेश, इंदौर", en: "Khajrana Ganesh, Indore" },
+      line: { hi: "एक ही थाली, एक ही अर्ज़ी — साथ माँगा आशीर्वाद", en: "One offering, one prayer — blessings sought together" },
+    },
+  ],
+
+  diary: [
+    {
+      photo: "/photos/darshan-mahakal-selfie.jpg",
+      cap: {
+        hi: "महाकाल के दर पे जो माँगी थी दुआ,\nवो तुम हो, जो आज हमसफ़र हुआ।",
+        en: "Mahakal ke dar pe jo maangi thi dua,\nWo tum ho, jo aaj humsafar hua.",
+      },
+    },
+    {
+      photo: "/photos/darshan-mandir-path.jpg",
+      cap: {
+        hi: "नंगे पाँव चले हम, एक ही राह पर,\nमंज़िल भी साथ होगी, है भरोसा उस पर।",
+        en: "Nange paanv chale hum, ek hi raah par,\nManzil bhi saath hogi, hai bharosa us par.",
+      },
+    },
+    {
+      photo: "/photos/darshan-omkareshwar-ishara.jpg",
+      cap: {
+        hi: "नर्मदा की लहरें गवाह बन गईं,\nउँगलियाँ उठीं और राहें एक हो गईं।",
+        en: "Narmada ki lehrein gawaah ban gayin,\nUngliyan uthin aur raahein ek ho gayin.",
+      },
+      stamp: "28.11.24",
+    },
+    {
+      photo: "/photos/darshan-mata-darbar.jpg",
+      cap: {
+        hi: "माँ के दरबार में झुका जो सर,\nसाथ तेरा माँगा, बस उम्र भर।",
+        en: "Maa ke darbaar mein jhuka jo sar,\nSaath tera maanga, bas umr bhar.",
+      },
+      stamp: "07.03.25",
+    },
+    {
+      photo: "/photos/darshan-mata-selfie.jpg",
+      cap: {
+        hi: "माँ की ममता और तेरी मुस्कान,\nइन दोनों से रोशन है मेरा जहान।",
+        en: "Maa ki mamta aur teri muskaan,\nIn dono se roshan hai mera jahaan.",
+      },
+      stamp: "07.03.25",
+      wide: true,
+    },
+    {
+      photo: "/photos/darshan-shivling.jpg",
+      cap: {
+        hi: "एक लोटा जल, दो हाथों का साथ,\nभोले ने सुन ली दिल की हर बात।",
+        en: "Ek lota jal, do haathon ka saath,\nBhole ne sun li dil ki har baat.",
+      },
+      stamp: "26.04.25",
+    },
+    {
+      photo: "/photos/darshan-deepstambh.jpg",
+      cap: {
+        hi: "दीयों की कतार सा ये साथ हमारा,\nहर अँधेरे में बने एक-दूजे का सहारा।",
+        en: "Diyon ki kataar sa ye saath hamaara,\nHar andhere mein bane ek-dooje ka sahaara.",
+      },
+      stamp: "26.04.25",
+    },
+    {
+      photo: "/photos/darshan-mahakal-haath.jpg",
+      cap: {
+        hi: "हाथ से हाथ मिला महाकाल के सामने,\nअब ये रिश्ता चला है जन्मों को थामने।",
+        en: "Haath se haath mila Mahakal ke saamne,\nAb ye rishta chala hai janmon ko thaamne.",
+      },
+      stamp: "26.04.25",
+    },
+    {
+      photo: "/photos/darshan-khajrana-saath.jpg",
+      cap: {
+        hi: "बप्पा के द्वार पे खड़े हैं हम साथ,\nशुभ हो हर शुरुआत, थामे रहें ये हाथ।",
+        en: "Bappa ke dwaar pe khade hain hum saath,\nShubh ho har shuruaat, thaame rahein ye haath.",
+      },
+      stamp: "26.11.25",
+    },
+    {
+      photo: "/photos/darshan-khajrana-prasad.jpg",
+      cap: {
+        hi: "बप्पा को अर्पण फूल और प्रसाद,\nविघ्नहर्ता रखें सदा हमें आबाद।",
+        en: "Bappa ko arpan phool aur prasaad,\nVighnaharta rakhein sada humein aabaad.",
+      },
+      stamp: "26.11.25",
+    },
   ],
 
   siteUrl: "",
@@ -442,6 +548,8 @@ export const brideSide: WeddingData = {
 
   heroPhotos: groomSide.heroPhotos,
   moments: groomSide.moments,
+  journeys: groomSide.journeys,
+  diary: groomSide.diary,
   siteUrl: groomSide.siteUrl,
 };
 
