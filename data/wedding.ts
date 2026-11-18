@@ -36,7 +36,7 @@ export const groomSide: WeddingData = {
   datetime: "2026-12-11T17:45",
   dateText: { hi: "शुक्रवार, 11 दिसंबर 2026", en: "Friday, 11 December 2026" },
   lagnaText: { hi: "शुभ लग्न · गोरज बेला", en: "Shubh Lagna · Goraj Bela (dusk)" },
-  countdownLabel: { hi: "शुभ लग्न में शेष समय", en: "Counting Down To The Wedding" },
+  countdownLabel: { hi: "शुभ विवाह दिवस में शेष समय", en: "Counting Down To The Wedding" },
 
   invocation: {
     hi: "मंगलम् भगवान विष्णुः, मंगलम् गरुड़ध्वजः।\nमंगलम् पुण्डरीकाक्षः, मंगलाय तनो हरिः॥",
@@ -225,7 +225,7 @@ export const groomSide: WeddingData = {
     { photo: "/photos/pal-seedhi.jpg", cap: { hi: "प्यार भरी नज़र", en: "That Look" } },
     { photo: "/photos/pal-bagicha.jpg", cap: { hi: "साथ-साथ", en: "Side by Side" } },
     { photo: "/photos/pal-nazar.jpg", cap: { hi: "पेड़ों की छाँव में", en: "Under the Trees" } },
-    { photo: "/photos/pal-mandir.jpg", cap: { hi: "मंदिर दर्शन", en: "Blessed Together" } },
+    { photo: "/photos/pal-mandir.jpg", cap: { hi: "साथ मिला आशीर्वाद", en: "Blessed Together" } },
     { photo: "/photos/pal-selfie.jpg", cap: { hi: "मुस्कान", en: "All Smiles" } },
     { photo: "/photos/pal-balloon.jpg", cap: { hi: "जश्न के पल", en: "Celebrations" }, wide: true },
   ],
@@ -251,87 +251,6 @@ export const groomSide: WeddingData = {
     },
   ],
 
-  diary: [
-    {
-      photo: "/photos/darshan-mahakal-selfie.jpg",
-      cap: {
-        hi: "महाकाल के दर पे जो माँगी थी दुआ,\nवो तुम हो, जो आज हमसफ़र हुआ।",
-        en: "Mahakal ke dar pe jo maangi thi dua,\nWo tum ho, jo aaj humsafar hua.",
-      },
-    },
-    {
-      photo: "/photos/darshan-mandir-path.jpg",
-      cap: {
-        hi: "नंगे पाँव चले हम, एक ही राह पर,\nमंज़िल भी साथ होगी, है भरोसा उस पर।",
-        en: "Nange paanv chale hum, ek hi raah par,\nManzil bhi saath hogi, hai bharosa us par.",
-      },
-    },
-    {
-      photo: "/photos/darshan-omkareshwar-ishara.jpg",
-      cap: {
-        hi: "नर्मदा की लहरें गवाह बन गईं,\nउँगलियाँ उठीं और राहें एक हो गईं।",
-        en: "Narmada ki lehrein gawaah ban gayin,\nUngliyan uthin aur raahein ek ho gayin.",
-      },
-      stamp: "28.11.24",
-    },
-    {
-      photo: "/photos/darshan-mata-darbar.jpg",
-      cap: {
-        hi: "माँ के दरबार में झुका जो सर,\nसाथ तेरा माँगा, बस उम्र भर।",
-        en: "Maa ke darbaar mein jhuka jo sar,\nSaath tera maanga, bas umr bhar.",
-      },
-      stamp: "07.03.25",
-    },
-    {
-      photo: "/photos/darshan-mata-selfie.jpg",
-      cap: {
-        hi: "माँ की ममता और तेरी मुस्कान,\nइन दोनों से रोशन है मेरा जहान।",
-        en: "Maa ki mamta aur teri muskaan,\nIn dono se roshan hai mera jahaan.",
-      },
-      stamp: "07.03.25",
-      wide: true,
-    },
-    {
-      photo: "/photos/darshan-shivling.jpg",
-      cap: {
-        hi: "एक लोटा जल, दो हाथों का साथ,\nभोले ने सुन ली दिल की हर बात।",
-        en: "Ek lota jal, do haathon ka saath,\nBhole ne sun li dil ki har baat.",
-      },
-      stamp: "26.04.25",
-    },
-    {
-      photo: "/photos/darshan-deepstambh.jpg",
-      cap: {
-        hi: "दीयों की कतार सा ये साथ हमारा,\nहर अँधेरे में बने एक-दूजे का सहारा।",
-        en: "Diyon ki kataar sa ye saath hamaara,\nHar andhere mein bane ek-dooje ka sahaara.",
-      },
-      stamp: "26.04.25",
-    },
-    {
-      photo: "/photos/darshan-mahakal-haath.jpg",
-      cap: {
-        hi: "हाथ से हाथ मिला महाकाल के सामने,\nअब ये रिश्ता चला है जन्मों को थामने।",
-        en: "Haath se haath mila Mahakal ke saamne,\nAb ye rishta chala hai janmon ko thaamne.",
-      },
-      stamp: "26.04.25",
-    },
-    {
-      photo: "/photos/darshan-khajrana-saath.jpg",
-      cap: {
-        hi: "बप्पा के द्वार पे खड़े हैं हम साथ,\nशुभ हो हर शुरुआत, थामे रहें ये हाथ।",
-        en: "Bappa ke dwaar pe khade hain hum saath,\nShubh ho har shuruaat, thaame rahein ye haath.",
-      },
-      stamp: "26.11.25",
-    },
-    {
-      photo: "/photos/darshan-khajrana-prasad.jpg",
-      cap: {
-        hi: "बप्पा को अर्पण फूल और प्रसाद,\nविघ्नहर्ता रखें सदा हमें आबाद।",
-        en: "Bappa ko arpan phool aur prasaad,\nVighnaharta rakhein sada humein aabaad.",
-      },
-      stamp: "26.11.25",
-    },
-  ],
 
   siteUrl: "",
 };
@@ -549,7 +468,6 @@ export const brideSide: WeddingData = {
   heroPhotos: groomSide.heroPhotos,
   moments: groomSide.moments,
   journeys: groomSide.journeys,
-  diary: groomSide.diary,
   siteUrl: groomSide.siteUrl,
 };
 

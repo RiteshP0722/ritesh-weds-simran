@@ -63,17 +63,6 @@ export interface Journey {
   line: L;
 }
 
-/** A polaroid in the "दर्शन डायरी" scrapbook. */
-export interface DiaryPhoto {
-  photo: string;
-  cap: L;
-  place?: L;
-  /** Camera-style date stamp on the photo, e.g. 26.04.25 */
-  stamp?: string;
-  /** Landscape photo: spans two columns */
-  wide?: boolean;
-}
-
 export interface Venue {
   name: L;
   address: L;
@@ -120,7 +109,6 @@ export interface WeddingData {
   heroPhotos: (string | { src: string; fit?: "whole"; focus?: string })[];
   moments: Moment[];
   journeys: Journey[];
-  diary: DiaryPhoto[];
   /** Deployed link for the WhatsApp invite; "" uses the current page URL */
   siteUrl: string;
 }

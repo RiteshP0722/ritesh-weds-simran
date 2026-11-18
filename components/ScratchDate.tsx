@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { dayAnchor, prefersReducedMotion } from "@/lib/utils";
 import type { WeddingData } from "@/types/wedding";
 
 /** Share of the foil that has to be scratched off before the rest falls away by itself. */
@@ -132,16 +133,43 @@ export default function ScratchDate({ data }: { data: WeddingData }) {
     navigator.vibrate?.(40);
   };
 
+  /** Once revealed, the card takes the guest down to that day in the events list and flashes it. */
+  const goToDay = () => {
+    const el = document.getElementById(dayAnchor(`${d}.${m}.${y}`));
+    if (!el) return;
+    el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+    el.classList.remove("is-flash");
+    void el.offsetWidth; // restart the animation on repeat clicks
+    el.classList.add("is-flash");
+    setTimeout(() => el.classList.remove("is-flash"), 2600);
+  };
+
   return (
     <div className={`scratch-wrap rv ${done ? "is-done" : ""}`}>
       <div className="eyebrow">{t("scratchEyebrow")}</div>
       <div className="scratch-card" ref={boxRef}>
-        <div className="scratch-under" aria-live="polite">
+        <div
+          className="scratch-under"
+          aria-live="polite"
+          {...(done && {
+            role: "button",
+            tabIndex: 0,
+            title: t("scratchSeeDay"),
+            onClick: goToDay,
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                goToDay();
+              }
+            },
+          })}
+        >
           <span className="sc-day">{weekday}</span>
           <span className="sc-date">
             {d} <i>•</i> {m} <i>•</i> {y.slice(2)}
           </span>
           <span className="sc-lagna">{p(data.lagnaText)}</span>
+          {done && <span className="sc-go">{t("scratchSeeDay")} ↓</span>}
         </div>
         <canvas
           ref={canvasRef}
