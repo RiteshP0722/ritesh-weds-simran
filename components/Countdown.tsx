@@ -30,15 +30,29 @@ function FlipDigit({ value }: { value: string }) {
 
 export default function Countdown({ datetime }: { datetime: string }) {
   const { t } = useLanguage();
-  const target = new Date(`${datetime}:00+05:30`).getTime();
+  // Count down to the start of the wedding day (12:00 AM IST), not to the lagna time in the evening.
+  const target = new Date(`${datetime.slice(0, 10)}T00:00:00+05:30`).getTime();
   const [rem, setRem] = useState<ReturnType<typeof remaining> | null>(null);
+  const [phase, setPhase] = useState<"before" | "today" | "after">("before");
 
   useEffect(() => {
-    const tick = () => setRem(remaining(target));
+    const tick = () => {
+      const now = Date.now();
+      setPhase(now < target ? "before" : now < target + 864e5 ? "today" : "after");
+      setRem(remaining(target));
+    };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [target]);
+
+  if (phase !== "before") {
+    return (
+      <p className="count-today" role="status">
+        {t(phase === "today" ? "weddingToday" : "weddingDone")}
+      </p>
+    );
+  }
 
   const units: [string, number | undefined][] = [
     [t("days"), rem?.days],

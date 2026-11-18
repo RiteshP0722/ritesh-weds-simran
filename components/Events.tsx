@@ -1,7 +1,7 @@
 "use client";
 
 import SectionHead from "./SectionHead";
-import { groupEventsByDay } from "@/lib/utils";
+import { dayAnchor, groupEventsByDay } from "@/lib/utils";
 import { useLanguage } from "@/lib/LanguageContext";
 import type { Day, WeddingEvent } from "@/types/wedding";
 
@@ -15,7 +15,7 @@ export default function Events({ days, events }: { days: Day[]; events: WeddingE
 
       <div className="timeline">
         {groups.map(({ day, items }) => (
-          <div key={day.id} className="day-group">
+          <div key={day.id} id={dayAnchor(day.date)} className="day-group">
             <div className="day-ribbon rv">
               <span className="day-date">{day.date}</span>
               <h3 className="day-title">{p(day.label)}</h3>

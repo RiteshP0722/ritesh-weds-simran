@@ -8,7 +8,6 @@ import Venue from "./Venue";
 import Families from "./Families";
 import Moments from "./Moments";
 import Yatra from "./Yatra";
-import Diary from "./Diary";
 import ShareJoy from "./ShareJoy";
 import Shayari from "./Shayari";
 import Footer from "./Footer";
@@ -29,7 +28,6 @@ export default function Site() {
         <Shayari id="pal" />
         <Moments moments={d.moments} />
         <Yatra journeys={d.journeys} />
-        <Diary photos={d.diary} />
         <Venue data={d} />
         <Shayari id="raah" />
         <ShareJoy data={d} />

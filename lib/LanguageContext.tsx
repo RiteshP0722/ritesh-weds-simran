@@ -56,6 +56,9 @@ const DICTIONARY: Record<string, L> = {
   scratchTitle: { hi: "✨ यहाँ खुरचें ✨", en: "✨ Scratch Here ✨" },
   scratchHint: { hi: "उंगली से रगड़कर शुभ दिन देखें", en: "Rub with your finger to reveal the day" },
   scratchAria: { hi: "शादी की तारीख देखने के लिए खुरचें", en: "Scratch to reveal the wedding date" },
+  weddingToday: { hi: "🎉 आज शुभ विवाह का मंगल दिन है 🎉", en: "🎉 Today is the wedding day 🎉" },
+  weddingDone: { hi: "शुभ विवाह सम्पन्न हुआ — आपके आशीर्वाद के लिए आभार 🙏", en: "The wedding is complete — thank you for your blessings 🙏" },
+  scratchSeeDay: { hi: "इस दिन के कार्यक्रम देखें", en: "See this day's events" },
   scratchDone: { hi: "इस दिन आपकी उपस्थिति प्रार्थनीय है 🙏", en: "Your presence on this day is our blessing 🙏" },
   days: { hi: "दिन", en: "Days" },
   hours: { hi: "घंटे", en: "Hours" },
@@ -79,12 +82,9 @@ const DICTIONARY: Record<string, L> = {
   familiesTitle: { hi: "हमारे परिवार", en: "Our Families" },
 
   // Moments
-  yatraEyebrow: { hi: "भगवान के आशीर्वाद से", en: "With the Lord's Blessings" },
-  yatraTitle: { hi: "आस्था की यात्रा", en: "Our Journey of Faith" },
+  yatraEyebrow: { hi: "साथ-साथ प्रभु के द्वार", en: "Together at His Door" },
+  yatraTitle: { hi: "मंदिर दर्शन", en: "Temple Darshan" },
   yatraFoot: { hi: "हर दर्शन में बस यही माँगा — ये साथ जन्मों का हो", en: "At every darshan, one wish: may this bond last lifetimes" },
-  diaryEyebrow: { hi: "साथ बिताए पल", en: "Pages from Our Travels" },
-  diaryTitle: { hi: "दर्शन डायरी", en: "Darshan Diary" },
-  diaryHint: { hi: "किसी भी फ़ोटो को छूकर बड़ा देखें", en: "Tap any photo to see it larger" },
   momentsEyebrow: { hi: "सुखद स्मृतियाँ", en: "Glimpses of Joy" },
   momentsTitle: { hi: "अनमोल पल", en: "Precious Moments" },
 
