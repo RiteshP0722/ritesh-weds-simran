@@ -1,5 +1,4 @@
 import Site from "@/components/Site";
-import MusicButton from "@/components/MusicButton";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import TopControls from "@/components/TopControls";
 import { LanguageProvider } from "@/lib/LanguageContext";
@@ -11,7 +10,6 @@ export default function Home() {
       <SideProvider>
         <TopControls />
         <Site />
-        <MusicButton />
         <RevealOnScroll />
       </SideProvider>
     </LanguageProvider>

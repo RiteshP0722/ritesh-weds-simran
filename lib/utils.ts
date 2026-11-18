@@ -29,6 +29,11 @@ export const shortName = (person: Person, lang: "hi" | "en") => (person.alias ??
 /** URL param that picks the bride's card (?side=bride); without it the groom's card is shown */
 export const SIDE_PARAM = "side";
 
+/** Element id of a day's block in the events list, from its "DD.MM.YYYY" date. */
+export function dayAnchor(date: string): string {
+  return `day-${date.replace(/\./g, "-")}`;
+}
+
 export function groupEventsByDay(days: Day[], events: WeddingEvent[]) {
   return days.map((day) => ({ day, items: events.filter((e) => e.day === day.id) })).filter((g) => g.items.length);
 }

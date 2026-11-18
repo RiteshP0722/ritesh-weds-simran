@@ -61,12 +61,12 @@ export default function TopControls() {
     };
   }, [open]);
 
-  // Switching card: show the new card from its start, with the invitation in view
+  // Switching card: show the new card from its very start (the front page)
   const pickSide = (s: Side) => {
     if (s === side) return;
     setSide(s);
     setOpen(false);
-    requestAnimationFrame(() => document.getElementById("invitation")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
   };
 
   const go = (id: string) => (e: React.MouseEvent) => {
