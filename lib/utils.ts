@@ -58,7 +58,9 @@ export function inviteMessage(d: WeddingData, siteUrl: string, guest = ""): stri
     `${full(a)} संग ${full(b)}\n\n` +
     `${d.feast.title.hi}: ${d.feast.date.hi}, ${d.feast.time.hi}\n` +
     `स्थान: ${d.venue.name.hi}, ${d.venue.address.hi}\n` +
-    `${d.lagnaText.hi}: ${d.dateText.hi}\n\nआप सपरिवार सादर आमंत्रित हैं।` +
+    `${d.lagnaText.hi}: ${d.dateText.hi}\n` +
+    (d.lagnaPlace ? `स्थान: ${d.lagnaPlace.hi}\n` : "") +
+    `\nआप सपरिवार सादर आमंत्रित हैं।` +
     (siteUrl ? `\n\nनिमंत्रण पत्रिका देखें:\n${siteUrl}` : "") +
     `\n\n— ${d.familyLine.hi.replace(" · ", ", ")}`
   );

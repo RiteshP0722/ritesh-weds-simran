@@ -36,6 +36,10 @@ export const groomSide: WeddingData = {
   datetime: "2026-12-11T17:45",
   dateText: { hi: "शुक्रवार, 11 दिसंबर 2026", en: "Friday, 11 December 2026" },
   lagnaText: { hi: "शुभ लग्न · गोरज बेला", en: "Shubh Lagna · Goraj Bela (dusk)" },
+  lagnaPlace: {
+    hi: "हिम्मत नगर, राधास्वामी 9 नं. गेट के आगे, पालदा, इन्दौर (म.प्र.)",
+    en: "Himmat Nagar, past Radhaswami Gate No. 9, Palda, Indore, Madhya Pradesh",
+  },
   countdownLabel: { hi: "शुभ विवाह दिवस में शेष समय", en: "Counting Down To The Wedding" },
 
   invocation: {

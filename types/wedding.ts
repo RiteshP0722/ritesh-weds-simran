@@ -84,6 +84,8 @@ export interface WeddingData {
   datetime: string;
   dateText: L;
   lagnaText: L;
+  /** Where the शुभ लग्न is held, when it differs from `venue` (added to the WhatsApp invite) */
+  lagnaPlace?: L;
   /** Heading above the countdown, e.g. शुभ लग्न में शेष समय */
   countdownLabel: L;
   invocation: L;
